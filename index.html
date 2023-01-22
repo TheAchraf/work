@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>McDonald's Work Tracker</title>
+  <style>
+    /* McDonald's styling */
+    h1 {
+      text-align: center;
+      color: #ED1C24; /* McDonald's red */
+      font-family: 'Open Sans', sans-serif;
+    }
+    form {
+      text-align: center;
+      padding: 20px;
+    }
+    label {
+      font-weight: bold;
+      font-family: 'Open Sans', sans-serif;
+    }
+    input[type=time] {
+      width: 60%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Open Sans', sans-serif;
+    }
+    button {
+      background-color: #ED1C24; /* McDonald's red */
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+    }
+    #result {
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Open Sans', sans-serif;
+    }
+    #footer {
+      text-align: center;
+    }
+    #footer a {
+      text-decoration: none; /* remove underline */
+    }
+    #footer a:hover {
+      text-decoration: underline; /* add underline on hover */
+    }
+  </style>
+</head>
+<body>
+  <h1>McDonald's Work Tracker</h1>
+  <form>
+    <label for="start-time">Start Time</label>
+    <input type="time" id="start-time" name="start-time"/><br>
+    <label for="break-start-time">Break Start Time</label>
+    <input type="time" id="break-start-time" name="break-start-time"/><br>
+    <label for="break-end-time">Break End Time</label>
+    <input type="time" id="break-end-time" name="break-end-time"/><br>
+    <label for="end-time">End Time</label>
+    <input type="time" id="end-time" name="end-time"/><br>
+  </form>
+  <br>
+  <p id="result"></p>
+  <div style="text-align:center;">
+  <button type="button" onclick="calculateHours()">Calculate Hours</button>
+  </div>
+  <script>
+    function calculateHours(){
+      var start = document.getElementById("start-time").value;
+      var breakStart = document.getElementById("break-start-time").value;
+      var breakEnd = document.getElementById("break-end-time").value;
+      var end = document.getElementById("end-time").value;
+      var startTime = new Date("1970-01-01T" + start + "Z");
+      var breakStartTime = new Date("1970-01-01T" + breakStart + "Z");
+      var breakEndTime = new Date("1970-01-01T" + breakEnd + "Z");
+      var endTime = new Date("1970-01-01T" + end + "Z");
+      var breakTime = breakEndTime - breakStartTime;
+var totalWorkTime = endTime - startTime - breakTime;
+
+//convert to hours
+var netWorkedTimeInHour = totalWorkTime / 1000 / 60 / 60;
+var earned = netWorkedTimeInHour * 15.55;
+
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'MAD',
+  minimumFractionDigits: 2
+});
+
+// display result
+document.getElementById("result").innerHTML = "Net Time Worked: " + netWorkedTimeInHour.toFixed(2) + " hours and Earned: " + formatter.format(earned);
+}
+</script>
+</body>
+</html>
+<p id="footer">Created by Achraf zahouani | <a href="https://www.instagram.com/_hraaf_/" target="_blank">Follow me on Instagram</a></p>
