@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>McDonald's work tracker</title>
+  <title>McDonald's Work Tracker</title>
   <style>
     /* McDonald's styling */
     h1 {
@@ -17,7 +17,7 @@
       font-weight: bold;
       font-family: 'Open Sans', sans-serif;
     }
-    input[type=time] {
+    input[type=datetime-local] {
       width: 60%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -39,30 +39,47 @@
     #result {
       text-align: center;
       font-weight: bold;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Open Sans
+      ', sans-serif;
     }
     #footer {
       text-align: center;
     }
     #footer a {
-      text-decoration: none; /* remove underline */
+      text-decoration: none; /* remove underline /
     }
     #footer a:hover {
-      text-decoration: underline; /* add underline on hover */
+      text-decoration: underline; / add underline on hover */
     }
-  </style>
-</head>
-<body>
+    #instructions {
+      background-color: #ED1C24; /* McDonald's red */
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    </style>
+      </head>
+      <body>
   <h1>McDonald's work hours tracker</h1>
+  <div style="border: 2px solid #ccc; padding: 20px; margin: 20px;">
+    <p style="font-weight: bold;">Instructions:</p>
+    <p>1. Use PM for times after 12:00 PM and AM for times before 12:00 PM.</p>
+    <p>2. The system will calculate the hours worked for the entire day.</p>
+    <p>3. The money earned is calculated based on the hourly rate for an Equipier employe which is 15.55 MAD.</p>
+  </div>
+  
   <form>
     <label for="start-time">Start Time</label>
-    <input type="time" id="start-time" name="start-time"/><br>
+    <input type="datetime-local" id="start-time" name="start-time"/><br>
     <label for="break-start-time">Break Start Time</label>
-    <input type="time" id="break-start-time" name="break-start-time"/><br>
+    <input type="datetime-local" id="break-start-time" name="break-start-time"/><br>
     <label for="break-end-time">Break End Time</label>
-    <input type="time" id="break-end-time" name="break-end-time"/><br>
+    <input type="datetime-local" id="break-end-time" name="break-end-time"/><br>
     <label for="end-time">End Time</label>
-    <input type="time" id="end-time" name="end-time"/><br>
+    <input type="datetime-local" id="end-time" name="end-time"/><br>
   </form>
   <br>
   <p id="result"></p>
@@ -75,11 +92,11 @@
       var breakStart = document.getElementById("break-start-time").value;
       var breakEnd = document.getElementById("break-end-time").value;
       var end = document.getElementById("end-time").value;
-      var startTime = new Date("1970-01-01T" + start + "Z");
-      var breakStartTime = new Date("1970-01-01T" + breakStart + "Z");
-      var breakEndTime = new Date("1970-01-01T" + breakEnd + "Z");
-      var endTime = new Date("1970-01-01T" + end + "Z");
-      var breakTime = breakEndTime - breakStartTime;
+      var startTime = new Date(start);
+      var breakStartTime = new Date(breakStart);
+      var breakEndTime = new Date(breakEnd);
+      var endTime = new Date(end);
+var breakTime = breakEndTime - breakStartTime;
 var totalWorkTime = endTime - startTime - breakTime;
 
 //convert to hours
@@ -87,15 +104,16 @@ var netWorkedTimeInHour = totalWorkTime / 1000 / 60 / 60;
 var earned = netWorkedTimeInHour * 15.55;
 
 var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'MAD',
-  minimumFractionDigits: 2
+style: 'currency',
+currency: 'MAD',
+minimumFractionDigits: 2
 });
 
 // display result
 document.getElementById("result").innerHTML = "Net Time Worked: " + netWorkedTimeInHour.toFixed(2) + " hours and Earned: " + formatter.format(earned);
 }
 </script>
+
 </body>
 </html>
-<p id="footer">Created by Achraf zahouani | <a href="https://www.instagram.com/_hraaf_/" target="_blank">Follow me on Instagram</a></p>
+<p id="footer">Copyright ©2022 Achraf zahouani | <a href="https://www.instagram.com/_hraaf_/" target="_blank">Follow me on Instagram</a></p>
