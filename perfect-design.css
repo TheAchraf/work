@@ -1,0 +1,446 @@
+/* McDonald's Work Tracker - Perfect Design CSS */
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-image: linear-gradient(135deg, #ffedcc 0%, #fff8e6 100%);
+}
+
+/* Container */
+.container {
+  max-width: 600px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Header */
+.header {
+  background-color: #ED1C24;
+  color: white;
+  padding: 25px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-color: #ffffff;
+  border-radius: 50% 50% 0 0;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Main content area */
+.content {
+  padding: 30px 25px;
+}
+
+/* Instructions */
+.instructions {
+  background-color: #FFC72C;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(255, 199, 44, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instructions:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 199, 44, 0.3);
+}
+
+.instructions-title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.instructions-title i {
+  margin-right: 8px;
+  color: #ED1C24;
+  font-size: 20px;
+}
+
+.instructions-list {
+  list-style-type: none;
+}
+
+.instructions-list li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+  font-size: 14px;
+}
+
+.instructions-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #ED1C24;
+  font-weight: bold;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 14px;
+}
+
+.input-container {
+  position: relative;
+}
+
+/* Flatpickr Input Styling */
+.flatpickr-input {
+  width: 100%;
+  padding: 14px 15px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+
+.flatpickr-input:focus {
+  border-color: #ED1C24;
+  box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.2);
+  outline: none;
+  background-color: #fff;
+}
+
+.input-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 18px;
+  pointer-events: none; /* Ensure the icon doesn't interfere with input clicks */
+}
+
+/* Flatpickr Calendar Styling */
+.flatpickr-calendar {
+  font-family: 'Poppins', sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.flatpickr-day.selected, .flatpickr-day.selected:hover {
+  background-color: #ED1C24;
+  border-color: #ED1C24;
+}
+
+.flatpickr-day.today {
+  border-color: #ED1C24;
+}
+
+.flatpickr-day.today:hover {
+  background-color: #ED1C24;
+  border-color: #ED1C24;
+}
+
+.flatpickr-time input, .flatpickr-time .flatpickr-time-separator, .flatpickr-time .flatpickr-am-pm {
+  color: #333;
+  font-weight: 500;
+}
+
+.flatpickr-time input:hover, .flatpickr-time .flatpickr-am-pm:hover {
+  background-color: #f5f5f5;
+}
+
+/* Error messages */
+.error {
+  color: #ED1C24;
+  font-size: 12px;
+  margin-top: 5px;
+  display: none;
+  font-weight: 500;
+  padding-left: 5px;
+}
+
+/* Button styles */
+.button-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+button {
+  background: linear-gradient(135deg, #ED1C24 0%, #c7161d 100%);
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(237, 28, 36, 0.25);
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #c7161d 0%, #b5141a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(237, 28, 36, 0.3);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 10px rgba(237, 28, 36, 0.2);
+}
+
+/* Results section */
+.result {
+  margin-top: 25px;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+  transition: all 0.5s ease;
+}
+
+.result.active {
+  opacity: 1;
+  height: auto;
+  padding: 25px;
+  background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+  border: 2px solid #e0e0e0;
+}
+
+.result-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.result-title i {
+  margin-right: 10px;
+  color: #ED1C24;
+  font-size: 22px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-weight: 500;
+  color: #666;
+  font-size: 14px;
+}
+
+.result-value {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.result-earnings {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #FFC72C;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.result-earnings:hover {
+  transform: scale(1.02);
+}
+
+/* Footer styling */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 13px;
+  margin-top: 30px;
+}
+
+.footer a {
+  color: #ED1C24;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: #c7161d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  body {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .container {
+    border-radius: 15px;
+    margin: 10px; /* Add margin for better spacing */
+  }
+
+  .header {
+    padding: 15px 10px; /* Reduce header padding */
+  }
+
+  h1 {
+    font-size: 20px; /* Smaller font size for mobile */
+  }
+
+  .content {
+    padding: 20px 15px; /* Reduce content padding */
+  }
+
+  .instructions {
+    padding: 10px 15px; /* Reduce instructions padding */
+  }
+
+  .instructions-title {
+    font-size: 16px; /* Smaller font size for instructions */
+  }
+
+  .instructions-list li {
+    font-size: 12px; /* Smaller font size for list items */
+  }
+
+  .form-group {
+    margin-bottom: 15px; /* Reduce spacing between form groups */
+  }
+
+  label {
+    font-size: 14px; /* Smaller font size for labels */
+  }
+
+  .flatpickr-input {
+    padding: 12px; /* Reduce input padding */
+    font-size: 14px; /* Smaller font size for inputs */
+  }
+
+  .input-icon {
+    font-size: 16px; /* Smaller icon size */
+    right: 10px; /* Adjust icon position */
+  }
+
+  button {
+    padding: 12px 30px; /* Smaller button padding */
+    font-size: 16px; /* Smaller font size for button */
+  }
+
+  .result {
+    padding: 15px; /* Reduce result padding */
+  }
+
+  .result-title {
+    font-size: 16px; /* Smaller font size for result title */
+  }
+
+  .result-item {
+    font-size: 14px; /* Smaller font size for result items */
+  }
+
+  .result-earnings {
+    font-size: 16px; /* Smaller font size for earnings */
+    padding: 10px; /* Reduce earnings padding */
+  }
+
+  .footer {
+    font-size: 12px; /* Smaller font size for footer */
+    padding: 15px; /* Reduce footer padding */
+  }
+}
+
+/* Animation for inputs */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(237, 28, 36, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(237, 28, 36, 0);
+  }
+}
+
+input:focus {
+  animation: pulse 1.5s infinite;
+}

@@ -1,119 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>McDonald's Work Tracker</title>
-  <style>
-    /* McDonald's styling */
-    h1 {
-      text-align: center;
-      color: #ED1C24; /* McDonald's red */
-      font-family: 'Open Sans', sans-serif;
-    }
-    form {
-      text-align: center;
-      padding: 20px;
-    }
-    label {
-      font-weight: bold;
-      font-family: 'Open Sans', sans-serif;
-    }
-    input[type=datetime-local] {
-      width: 60%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      font-family: 'Open Sans', sans-serif;
-    }
-    button {
-      background-color: #ED1C24; /* McDonald's red */
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: 'Open Sans', sans-serif;
-    }
-    #result {
-      text-align: center;
-      font-weight: bold;
-      font-family: 'Open Sans
-      ', sans-serif;
-    }
-    #footer {
-      text-align: center;
-    }
-    #footer a {
-      text-decoration: none; /* remove underline /
-    }
-    #footer a:hover {
-      text-decoration: underline; / add underline on hover */
-    }
-    #instructions {
-      background-color: #ED1C24; /* McDonald's red */
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    </style>
-      </head>
-      <body>
-  <h1>McDonald's work hours tracker</h1>
-  <div style="border: 2px solid #ccc; padding: 20px; margin: 20px;">
-    <p style="font-weight: bold;">Instructions:</p>
-    <p>1. Use PM for times after 12:00 PM and AM for times before 12:00 PM.</p>
-    <p>2. The system will calculate the hours worked for the entire day.</p>
-    <p>3. The money earned is calculated based on the hourly rate for an Equipier employe which is 15.55 MAD.</p>
+  <link rel="stylesheet" href="perfect-design.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="images/mcdonalds-logo.png" alt="McDonald's Logo" class="logo">
+      <h1>McDonald's Work Hours Tracker</h1>
+    </div>
+    
+    <div class="content">
+      <div class="instructions">
+        <div class="instructions-title">
+          <i class="fas fa-info-circle"></i>
+          <span>Instructions</span>
+        </div>
+        <ul class="instructions-list">
+          <li>Enter your shift start and end times.</li>
+          <li>Enter your break start and end times (if applicable).</li>
+          <li>The system will calculate your hours worked and earnings.</li>
+          <li>The hourly rate for an Equipier employee is 15.55 MAD.</li>
+        </ul>
+      </div>
+      
+      <form id="work-tracker-form">
+        <div class="form-group">
+          <label for="start-time">Shift Start Time:</label>
+          <div class="input-container">
+            <input type="text" id="start-time" class="flatpickr" placeholder="Select Date and Time">
+            <i class="fas fa-clock input-icon"></i>
+          </div>
+          <div class="error" id="start-time-error">Please enter a valid start time</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="break-start-time">Break Start Time (optional):</label>
+          <div class="input-container">
+            <input type="text" id="break-start-time" class="flatpickr" placeholder="Select Date and Time">
+            <i class="fas fa-coffee input-icon"></i>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="break-end-time">Break End Time (optional):</label>
+          <div class="input-container">
+            <input type="text" id="break-end-time" class="flatpickr" placeholder="Select Date and Time">
+            <i class="fas fa-mug-hot input-icon"></i>
+          </div>
+          <div class="error" id="break-time-error">Break end time must be after break start time</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="end-time">Shift End Time:</label>
+          <div class="input-container">
+            <input type="text" id="end-time" class="flatpickr" placeholder="Select Date and Time">
+            <i class="fas fa-clock input-icon"></i>
+          </div>
+          <div class="error" id="end-time-error">End time must be after start time</div>
+        </div>
+        
+        <div class="button-container">
+          <button type="button" onclick="calculateHours()">Calculate Hours</button>
+        </div>
+      </form>
+      
+      <div class="result" id="result">
+        <div class="result-title">
+          <i class="fas fa-calculator"></i>
+          <span>Your Results</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Total Shift Length:</span>
+          <span class="result-value" id="total-time"></span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Break Duration:</span>
+          <span class="result-value" id="break-time"></span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Net Time Worked:</span>
+          <span class="result-value" id="net-time"></span>
+        </div>
+        <div class="result-earnings" id="earnings"></div>
+      </div>
+    </div>
   </div>
   
-  <form>
-    <label for="start-time">Start Time</label>
-    <input type="datetime-local" id="start-time" name="start-time"/><br>
-    <label for="break-start-time">Break Start Time</label>
-    <input type="datetime-local" id="break-start-time" name="break-start-time"/><br>
-    <label for="break-end-time">Break End Time</label>
-    <input type="datetime-local" id="break-end-time" name="break-end-time"/><br>
-    <label for="end-time">End Time</label>
-    <input type="datetime-local" id="end-time" name="end-time"/><br>
-  </form>
-  <br>
-  <p id="result"></p>
-  <div style="text-align:center;">
-  <button type="button" onclick="calculateHours()">Calculate Hours</button>
+  <div class="footer">
+    Copyright ©2025 | <a href="https://www.instagram.com/_hraaf_/" target="_blank"><i class="fab fa-instagram"></i> Follow me on Instagram</a>
   </div>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
-    function calculateHours(){
-      var start = document.getElementById("start-time").value;
-      var breakStart = document.getElementById("break-start-time").value;
-      var breakEnd = document.getElementById("break-end-time").value;
-      var end = document.getElementById("end-time").value;
-      var startTime = new Date(start);
-      var breakStartTime = new Date(breakStart);
-      var breakEndTime = new Date(breakEnd);
-      var endTime = new Date(end);
-var breakTime = breakEndTime - breakStartTime;
-var totalWorkTime = endTime - startTime - breakTime;
+    document.addEventListener('DOMContentLoaded', function () {
+      flatpickr('.flatpickr', {
+        enableTime: true, // Enable time selection
+        dateFormat: 'Y-m-d H:i', // Use 24-hour format
+        time_24hr: true, // Force 24-hour format
+        minuteIncrement: 1, // Set minute increment
+        allowInput: true, // Allow manual input
+      });
+    });
 
-//convert to hours
-var netWorkedTimeInHour = totalWorkTime / 1000 / 60 / 60;
-var earned = netWorkedTimeInHour * 15;
+    function calculateHours() {
+      // Reset error messages
+      document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
 
-var formatter = new Intl.NumberFormat('en-US', {
-style: 'currency',
-currency: 'MAD',
-minimumFractionDigits: 2
-});
+      // Get time inputs
+      const startTime = new Date(document.getElementById("start-time").value);
+      const endTime = new Date(document.getElementById("end-time").value);
+      const breakStartInput = document.getElementById("break-start-time").value;
+      const breakEndInput = document.getElementById("break-end-time").value;
 
-// display result
-document.getElementById("result").innerHTML = "Net Time Worked: " + netWorkedTimeInHour.toFixed(2) + " hours and Earned: " + formatter.format(earned);
-}
-</script>
+      // Validate inputs
+      let isValid = true;
 
+      if (isNaN(startTime.getTime())) {
+        document.getElementById("start-time-error").style.display = 'block';
+        isValid = false;
+      }
+
+      if (isNaN(endTime.getTime())) {
+        document.getElementById("end-time-error").style.display = 'block';
+        isValid = false;
+      }
+
+      if (startTime >= endTime) {
+        document.getElementById("end-time-error").style.display = 'block';
+        isValid = false;
+      }
+
+      // Calculate total work time
+      let totalWorkTime = endTime - startTime;
+      let breakTime = 0;
+
+      // Calculate break time if provided
+      if (breakStartInput && breakEndInput) {
+        const breakStartTime = new Date(breakStartInput);
+        const breakEndTime = new Date(breakEndInput);
+
+        if (breakStartTime >= breakEndTime) {
+          document.getElementById("break-time-error").style.display = 'block';
+          isValid = false;
+        } else {
+          breakTime = breakEndTime - breakStartTime;
+        }
+      }
+
+      if (!isValid) {
+        return;
+      }
+
+      // Calculate net worked time
+      const netWorkedTime = totalWorkTime - breakTime;
+      const netWorkedTimeInHours = netWorkedTime / (1000 * 60 * 60);
+
+      // Calculate earnings (hourly rate is 15.55 MAD)
+      const hourlyRate = 15.55;
+      const earned = netWorkedTimeInHours * hourlyRate;
+
+      // Format currency
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'MAD',
+        minimumFractionDigits: 2
+      });
+
+      // Format time display - hours and minutes
+      function formatTime(milliseconds) {
+        const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+        const minutes = Math.round((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+        return `${hours} hour${hours !== 1 ? 's' : ''} and ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+      }
+
+      // Display results
+      document.getElementById("total-time").textContent = formatTime(totalWorkTime);
+      document.getElementById("break-time").textContent = breakTime > 0 ? formatTime(breakTime) : "No break taken";
+      document.getElementById("net-time").textContent = formatTime(netWorkedTime);
+      document.getElementById("earnings").textContent = `You earned: ${formatter.format(earned)}`;
+
+      // Show results
+      document.getElementById("result").classList.add('active');
+    }
+  </script>
 </body>
 </html>
-<p id="footer">Copyright ©2022 Achraf zahouani | <a href="https://www.instagram.com/_hraaf_/" target="_blank">Follow me on Instagram</a></p>
