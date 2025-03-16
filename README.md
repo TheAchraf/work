@@ -49,6 +49,6 @@ This project is licensed under the MIT License.
 
 For questions or feedback, feel free to reach out:
 
-- **GitHub**: [Your GitHub Profile](https://github.com/your-username)
+- **GitHub**: [Your GitHub Profile](https://github.com/theachraf)
 - **Instagram**: [Follow me on Instagram](https://www.instagram.com/_hraaf_/)
-- **Email**: your-email@example.com
+- **Email**: achraf@gmail.com
